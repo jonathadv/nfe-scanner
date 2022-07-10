@@ -1,0 +1,29 @@
+[MASTER]
+load-plugins=pylint.extensions.bad_builtin,pylint.extensions.mccabe
+extension-pkg-whitelist=pydantic
+
+[BASIC]
+# List of builtins function names that should not be used, separated by a comma
+bad-functions=input,print
+
+# Good variable names which should always be accepted, separated by a comma
+good-names=pk,f,i,j,k,v,e,ex,x,y,Run,tz
+
+[DESIGN]
+# Minimum number of public methods for a class (see R0903).
+min-public-methods=0
+
+[SIMILARITIES]
+# Ignore imports when computing similarities.
+ignore-imports=yes
+
+[MESSAGES CONTROL]
+disable=
+    # we don't need docstring everywhere
+    missing-docstring,
+
+    # we have to use broad-exceptions as catch all
+    broad-except,
+
+    # handled by black
+    format,
