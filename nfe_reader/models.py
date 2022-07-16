@@ -31,6 +31,7 @@ class NfeItem(BaseModel):
 
 
 class Nfe(BaseModel):
+    access_key: str
     title: str
     issued_date: datetime
     items: list[NfeItem] = []
@@ -44,7 +45,9 @@ class Nfe(BaseModel):
 
     def __str__(self):
         content = [
-            f"Title: {self.title}\n" f"Date: {self.issued_date}\n",
+            f"Access Key: {self.access_key}\n"
+            f"Title: {self.title}\n"
+            f"Date: {self.issued_date}\n",
             f"Total Amount: {self.total_amount}\n",
         ]
         for item in self.items:

@@ -23,7 +23,7 @@ def test_parse_one_nfe(_read_config, _fetch_nfe_html, snapshot):
 
 @mock.patch("nfe_reader.nfe.fetch_nfe_html", return_value=read_html("nfe_rs.html"))
 @mock.patch("nfe_reader.nfe.read_config")
-def test_parse_exclude_duplicate_codes(read_config, _fetch_nfe_html, snapshot):
+def test_parse_exclude_duplicate_codes(read_config, _fetch_nfe_html):
     input_codes = ["123"] * 10
     read_config.return_value = Config(nfe_endpoint="http://host", nfe_codes=input_codes)
 

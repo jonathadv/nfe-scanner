@@ -70,11 +70,16 @@ def parse_nfe(html: BeautifulSoup) -> Nfe:
     )
 
     items_total_amount = sum(item.total_amount for item in items)
+    access_key = (
+        html.select('td:-soup-contains("CHAVE DE ACESSO")')[-1].find_next("td").text.strip()
+    )
+
     assert (
         total_amount == items_total_amount
     ), f"NFe total: {total_amount} != items total: {items_total_amount}"
 
     return Nfe(
+        access_key=access_key,
         title=title,
         issued_date=issued_date,
         items=items,

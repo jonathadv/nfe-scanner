@@ -17,6 +17,7 @@ pylint = "^2.14.4"
 taskipy = "^1.9.0"
 pytest = "^7.1.2"
 pytest-cov = "^3.0.0"
+snapshottest = "^0.6.0"
 
 [tool.poetry.scripts]
 poetry = 'nfe_reader.core:say_hi'
