@@ -7,7 +7,7 @@ from pydantic import AnyHttpUrl, BaseModel
 
 class Config(BaseModel):
     nfe_endpoint: AnyHttpUrl
-    nfe_codes: list[str]
+    nfe_codes: set[str]
 
 
 class MetricUnit(Enum):

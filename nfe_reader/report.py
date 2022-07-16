@@ -29,6 +29,7 @@ ITEM_TOTAL_AMOUNT = "Total Amount"
 def l10n_decimal(value: Decimal) -> str:
     return str(value).replace(".", ",")
 
+
 def csv_report(nfes: list[Nfe]):
     now = datetime.now().strftime("%Y-%m-%d_%H_%M_%S")
     report_name = f"report-{now}.csv"
