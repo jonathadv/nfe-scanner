@@ -42,9 +42,6 @@ class Nfe(BaseModel):
     def __gt__(self, other: "Nfe"):
         return self.issued_date > other.issued_date
 
-    def total_amount(self) -> Decimal:
-        return sum(item.total_amount for item in self.items)
-
     def __str__(self):
         content = [
             f"Title: {self.title}\n" f"Date: {self.issued_date}\n",
