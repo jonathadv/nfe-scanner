@@ -8,13 +8,6 @@ from nfe_reader.models import Nfe
 LOGGER = logging.getLogger(__name__)
 
 
-def console_report(nfes: list[Nfe]):
-    LOGGER.info("%s", "=" * 25 + "RESULT" + "=" * 25)
-    for nfe in nfes:
-        LOGGER.info(nfe)
-        LOGGER.info("-" * 50)
-
-
 NFE_DATE = "NFe Date"
 NFE_TITLE = "NFe Title"
 NFE_TOTAL_AMOUNT = "NFe Total Amount"
@@ -57,7 +50,7 @@ def csv_report(nfes: list[Nfe]):
             }
             for item in nfe.items:
                 item_columns = {
-                    ITEM_CODE: item.code,
+                    ITEM_CODE: item.barcode,
                     ITEM_DESCRIPTION: item.description,
                     ITEM_QUANTITY: l10n_decimal(item.quantity),
                     ITEM_METRIC_UNIT: item.metric_unit.value,

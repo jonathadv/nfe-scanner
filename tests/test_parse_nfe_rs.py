@@ -1,33 +1,46 @@
+import pathlib
 from unittest import mock
 
+import pytest
 from bs4 import BeautifulSoup
 
-from nfe_reader.models import Config, Nfe
-from nfe_reader.nfe import parse_nfes
+from nfe_reader.exceptions import NfeFetcherException
+from nfe_reader.fetchers.factory import NfeFetcherFactory
+from nfe_reader.models import Nfe
+from nfe_reader.nfe import scan_nfe
 
 
 def read_html(filename: str) -> BeautifulSoup:
-    with open(f"html/{filename}", encoding="utf-8") as f:
+    parent = pathlib.Path(__file__).parent.resolve()
+    with open(f"{parent}/html/{filename}", encoding="utf-8") as f:
         html = f.read()
-    return BeautifulSoup(html)
+    return html
 
 
-@mock.patch("nfe_reader.nfe.fetch_nfe_html", return_value=read_html("nfe_rs.html"))
 @mock.patch(
-    "nfe_reader.nfe.read_config", return_value=Config(nfe_endpoint="http://host", nfe_codes=["123"])
+    "requests_html.HTMLSession.get",
+    return_value=mock.MagicMock(text=read_html("nfe_rs.html"), ok=True),
 )
-def test_parse_one_nfe(_read_config, _fetch_nfe_html, snapshot):
-    nfes: list[Nfe] = parse_nfes()
-    snapshot.assert_match(nfes[0].json())
+def test_parse_one_nfe(_requests_get, snapshot):
+    nfe: Nfe = scan_nfe("http://" + NfeFetcherFactory.SEFAZ_RS_HOSTNAME + "/?p=1")
+    snapshot.assert_match(nfe.json())
 
 
-@mock.patch("nfe_reader.nfe.fetch_nfe_html", return_value=read_html("nfe_rs.html"))
-@mock.patch("nfe_reader.nfe.read_config")
-def test_parse_exclude_duplicate_codes(read_config, _fetch_nfe_html):
-    input_codes = ["123"] * 10
-    read_config.return_value = Config(nfe_endpoint="http://host", nfe_codes=input_codes)
+def test_access_key_missing_in_url():
+    expected_error_message = (
+        "is missing the access key. It must be in query parameter format '?p=<access key>"
+    )
 
-    nfes: list[Nfe] = parse_nfes()
+    with pytest.raises(ValueError) as exc_info:
+        scan_nfe("http://" + NfeFetcherFactory.SEFAZ_RS_HOSTNAME)
 
-    assert len(input_codes) == 10
-    assert len(nfes) == 1
+    assert expected_error_message in str(exc_info.value)
+
+
+def test_url_not_associated_to_any_available_fetcher():
+    expected_error_message = "URL is not associated to any available fetcher"
+
+    with pytest.raises(NfeFetcherException) as exc_info:
+        scan_nfe("http://host/?p=1")
+
+    assert expected_error_message in str(exc_info.value)
