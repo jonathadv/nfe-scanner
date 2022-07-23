@@ -3,9 +3,9 @@ from urllib.parse import urlparse
 
 import click
 
-from nfe_reader.models import Nfe
-from nfe_reader.nfe import scan_multiple_nfe
-from nfe_reader.reports.console import console_report
+from nfe_scanner.models import Nfe
+from nfe_scanner.nfe import scan_multiple_nfe
+from nfe_scanner.reports.console import console_report
 
 LOGGER = logging.getLogger(__name__)
 

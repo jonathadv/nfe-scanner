@@ -4,8 +4,8 @@ from decimal import Decimal
 
 from arrow import Arrow
 
-from nfe_reader.models import Nfe
-from nfe_reader.reports.sqlite import add_nfe, add_nfe_item, connect, create_tables
+from nfe_scanner.models import Nfe
+from nfe_scanner.reports.sqlite import add_nfe, add_nfe_item, connect, create_tables
 
 LOGGER = logging.getLogger(__name__)
 

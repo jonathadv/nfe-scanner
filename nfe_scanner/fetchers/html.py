@@ -2,7 +2,7 @@ import logging
 
 from requests_html import HTMLResponse, HTMLSession
 
-from nfe_reader.fetchers.base import (
+from nfe_scanner.fetchers.base import (
     NfeFetcher,
     NfeFetcherResponse,
     NfeFetcherResponseType,

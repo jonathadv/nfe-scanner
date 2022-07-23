@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "nfe_reader-reader"
+name = "nfe_scanner"
 version = "0.1.0"
 description = ""
-authors = ["Jonatha Daguerre Vasconcelos <jonatha@daguerre.com.br>"]
+authors = ["Jonatha Daguerre <jonatha@daguerre.com.br>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -24,7 +24,7 @@ pytest-cov = "^3.0.0"
 snapshottest = "^0.6.0"
 
 [tool.poetry.scripts]
-poetry = 'nfe_reader.core:say_hi'
+poetry = 'nfe_scanner.core:say_hi'
 
 [tool.black]
 line-length = 100
@@ -50,15 +50,15 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["nfe_reader"]
+source = ["nfe_scanner"]
 
 [tool.coverage.report]
 show_missing = true
 fail_under = 100
 
 [tool.taskipy.tasks]
-format = { cmd = "isort nfe_reader tests && black nfe_reader tests", help = "format with isort and black" }
-lint = { cmd = "pylint nfe_reader tests", help = "confirms code style using pylint" }
+format = { cmd = "isort nfe_scanner tests && black nfe_scanner tests", help = "format with isort and black" }
+lint = { cmd = "pylint nfe_scanner tests", help = "confirms code style using pylint" }
 test = { cmd = "pytest", help = "runs all unit tests" }
 "test:cov" = { cmd = "pytest --cov", help = "runs all unit tests" }
 

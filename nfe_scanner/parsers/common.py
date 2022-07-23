@@ -4,7 +4,7 @@ from decimal import Decimal
 
 import arrow
 
-from nfe_reader.models import MetricUnit
+from nfe_scanner.models import MetricUnit
 
 
 def parse_decimal(value: str, decimal_separator: str = ",") -> Decimal:

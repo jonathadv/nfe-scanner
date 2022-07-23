@@ -4,9 +4,9 @@ from decimal import Decimal
 
 from bs4 import BeautifulSoup
 
-from nfe_reader.models import Address, Nfe, NfeConsumer, NfeIssuer, NfeItem, PaymentType
-from nfe_reader.parsers.base import NfeParser
-from nfe_reader.parsers.common import Value
+from nfe_scanner.models import Address, Nfe, NfeConsumer, NfeIssuer, NfeItem, PaymentType
+from nfe_scanner.parsers.base import NfeParser
+from nfe_scanner.parsers.common import Value
 
 
 def to_bs(html: str) -> BeautifulSoup:

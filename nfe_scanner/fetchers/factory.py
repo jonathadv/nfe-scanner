@@ -1,8 +1,8 @@
 import logging
 
-from nfe_reader.exceptions import NfeFetcherException
-from nfe_reader.fetchers.base import NfeFetcher, NfeUrl
-from nfe_reader.fetchers.html import NfeHtmlFetcher
+from nfe_scanner.exceptions import NfeFetcherException
+from nfe_scanner.fetchers.base import NfeFetcher, NfeUrl
+from nfe_scanner.fetchers.html import NfeHtmlFetcher
 
 LOGGER = logging.getLogger(__name__)
 

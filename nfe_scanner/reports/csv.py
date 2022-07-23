@@ -3,7 +3,7 @@ import logging
 from datetime import datetime
 from decimal import Decimal
 
-from nfe_reader.models import Nfe
+from nfe_scanner.models import Nfe
 
 LOGGER = logging.getLogger(__name__)
 

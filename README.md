@@ -1,6 +1,6 @@
-# nfe-reader
+# nfe-scanner
 
-Fetches Brazilian NFe and generates reports from it.
+Scanner for Brazilian NFe
 
 ## Setup
 ```bash

@@ -1,9 +1,9 @@
 import logging
 
-from nfe_reader.exceptions import NfeParserException
-from nfe_reader.fetchers.base import NfeFetcherResponse, NfeFetcherResponseType
-from nfe_reader.parsers.base import NfeParser
-from nfe_reader.parsers.html import NfeHtmlParser
+from nfe_scanner.exceptions import NfeParserException
+from nfe_scanner.fetchers.base import NfeFetcherResponse, NfeFetcherResponseType
+from nfe_scanner.parsers.base import NfeParser
+from nfe_scanner.parsers.html import NfeHtmlParser
 
 LOGGER = logging.getLogger(__name__)
 

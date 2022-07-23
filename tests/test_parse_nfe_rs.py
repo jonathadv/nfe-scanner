@@ -4,10 +4,10 @@ from unittest import mock
 import pytest
 from bs4 import BeautifulSoup
 
-from nfe_reader.exceptions import NfeFetcherException
-from nfe_reader.fetchers.factory import NfeFetcherFactory
-from nfe_reader.models import Nfe
-from nfe_reader.nfe import scan_nfe
+from nfe_scanner.exceptions import NfeFetcherException
+from nfe_scanner.fetchers.factory import NfeFetcherFactory
+from nfe_scanner.models import Nfe
+from nfe_scanner.nfe import scan_nfe
 
 
 def read_html(filename: str) -> BeautifulSoup:
