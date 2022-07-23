@@ -74,6 +74,9 @@ class NfeHtmlParser(NfeParser):
             html.select('td:-soup-contains("CONSUMIDOR")')[-1]
             .parent.parent.find_all("td")[-1]
             .text.strip()
+            .replace("CPF:", "")
+            .replace("\n", "")
+            .strip()
         )
         return NfeConsumer(identification=Value(consumer).text)
 
