@@ -15,7 +15,7 @@ def parse_decimal(value: str, decimal_separator: str = ",") -> Decimal:
 def parse_metric_unit(unit: str) -> MetricUnit:
     if unit == "KG":
         return MetricUnit.KG
-    if unit == "UN":
+    if unit in ("UN", "EX"):
         return MetricUnit.UNIT
     raise ValueError(f"value f'{unit}' is not valid unit.")
 
