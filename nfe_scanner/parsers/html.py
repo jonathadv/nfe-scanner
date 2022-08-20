@@ -136,6 +136,8 @@ class NfeHtmlParser(NfeParser):
             payment_type = PaymentType.DEBIT_CARD
         elif re.match(".*dinheiro.*", payment_type_text, re.I):
             payment_type = PaymentType.MONEY
+        elif re.match(".*Vale Alimenta..o.*", payment_type_text, re.I):
+            payment_type = PaymentType.FOOD_VOUCHER
         else:
             raise ValueError(f"'{payment_type_text}' is not a valid payment type")
 
