@@ -26,15 +26,12 @@ def test_parse_one_nfe(_requests_get, snapshot):
     snapshot.assert_match(nfe.json())
 
 
-def test_access_key_missing_in_url():
-    expected_error_message = (
-        "is missing the access key. It must be in query parameter format '?p=<access key>"
-    )
+def test_access_key_missing_in_url(snapshot):
 
     with pytest.raises(ValueError) as exc_info:
         scan_nfe("http://" + NfeFetcherFactory.SEFAZ_RS_HOSTNAME)
 
-    assert expected_error_message in str(exc_info.value)
+    snapshot.assert_match(exc_info.value)
 
 
 def test_url_not_associated_to_any_available_fetcher():
