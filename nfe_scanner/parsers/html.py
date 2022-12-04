@@ -82,9 +82,11 @@ class NfeHtmlParser(NfeParser):
 
     @staticmethod
     def _parse_issuer_address(html: BeautifulSoup) -> Address:
-        street, number, neighborhood, city, state = (
-            html.select(".NFCCabecalho_SubTitulo1")[-1].text.replace("\n", "").split(",")
-        )
+        address_text = html.select(".NFCCabecalho_SubTitulo1")[-1].text.replace("\n", "")
+        # remove ", 0," from address
+        address_text = re.sub(",[ ]+0,", ",", address_text)
+        street, number, neighborhood, city, state = address_text.split(",")
+
         line1 = f"{street} {number} {neighborhood}"
         line2 = None
         country = "BR"
