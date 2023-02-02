@@ -51,6 +51,7 @@ class PaymentType(str, Enum):
     MONEY = "MONEY"
     STORE_CARD = "STORE_CARD"
     FOOD_VOUCHER = "FOOD_VOUCHER"
+    OTHER = "OTHER"
 
 
 class Nfe(BaseModel):
