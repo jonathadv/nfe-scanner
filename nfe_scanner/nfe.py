@@ -9,7 +9,7 @@ def scan_nfe(url: str) -> Nfe:
     nfe_url = NfeUrl(url)
     fetcher: NfeFetcher = NfeFetcherFactory(nfe_url).create()
     response: NfeFetcherResponse = fetcher.fetch()
-    parser: NfeParser = NfeParserFactory(response).create()
+    parser: NfeParser = NfeParserFactory(nfe_url, response).create()
 
     return parser.parse()
 

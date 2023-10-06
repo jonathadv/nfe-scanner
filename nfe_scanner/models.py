@@ -37,7 +37,7 @@ class NfeItem(BaseModel):
 class NfeIssuer(BaseModel):
     name: str
     national_registration_code: str
-    state_registration_code: str
+    state_registration_code: str | None
     address: Address
 
 

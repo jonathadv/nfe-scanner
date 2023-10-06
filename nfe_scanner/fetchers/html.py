@@ -22,7 +22,7 @@ class NfeHtmlFetcher(NfeFetcher):
         session = HTMLSession()
         resp: HTMLResponse = session.get(self.url.full)
         resp = self.maybe_process_iframe(session, resp)
-        return NfeFetcherResponse(resp.text, NfeFetcherResponseType.HTML, resp.ok)
+        return NfeFetcherResponse(self.url, resp.text, NfeFetcherResponseType.HTML, resp.ok)
 
     @staticmethod
     def maybe_process_iframe(session: HTMLSession, resp: HTMLResponse) -> HTMLResponse:

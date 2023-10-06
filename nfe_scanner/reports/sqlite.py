@@ -5,7 +5,6 @@ from decimal import Decimal
 from arrow import Arrow
 
 from nfe_scanner.models import Nfe
-from nfe_scanner.reports.sqlite import add_nfe, add_nfe_item, connect, create_tables
 
 LOGGER = logging.getLogger(__name__)
 
@@ -69,7 +68,7 @@ def add_nfe(
 ):
     cursor = connection.cursor()
     cursor.execute(
-        f"INSERT INTO nfe (access_key, title, issued_date, total_amount, raw_html) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO nfe (access_key, title, issued_date, total_amount, raw_html) VALUES (?, ?, ?, ?, ?)",
         (access_key, title, str(issued_date), float(total_amount), raw_html),
     )
     connection.commit()
@@ -89,7 +88,7 @@ def add_nfe_item(
 ):
     cursor = connection.cursor()
     cursor.execute(
-        f"INSERT INTO nfe_item (barcode, description, quantity, metric_unit, unitary_price, total_amount, nfe) VALUES (?, ?, ?, ?, ?, ? , ?)",
+        "INSERT INTO nfe_item (barcode, description, quantity, metric_unit, unitary_price, total_amount, nfe) VALUES (?, ?, ?, ?, ?, ? , ?)",
         (
             barcode,
             description,

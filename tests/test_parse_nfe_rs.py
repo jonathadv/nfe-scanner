@@ -26,6 +26,15 @@ def test_parse_one_nfe(_requests_get, snapshot):
     snapshot.assert_match(nfe.json())
 
 
+@mock.patch(
+    "requests_html.HTMLSession.get",
+    return_value=mock.MagicMock(text=read_html("nfe_rs_v2.html"), ok=True),
+)
+def test_parse_one_nfe_rs_v2(_requests_get, snapshot):
+    nfe: Nfe = scan_nfe("http://" + NfeFetcherFactory.SEFAZ_RS_V2_HOSTNAME + "/Dfe/QrCodeNFce?p=1")
+    snapshot.assert_match(nfe.json())
+
+
 def test_access_key_missing_in_url(snapshot):
 
     with pytest.raises(ValueError) as exc_info:

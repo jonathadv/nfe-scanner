@@ -1,8 +1,9 @@
 import logging
 from abc import ABC, abstractmethod
 from enum import Enum
-from pydash import py_
+
 from furl import furl
+from pydash import py_
 
 LOGGER = logging.getLogger(__name__)
 
@@ -51,15 +52,21 @@ class NfeFetcherResponseType(Enum):
 class NfeFetcherResponse:
     def __init__(
         self,
+        url: NfeUrl,
         raw: str,
         response_type: NfeFetcherResponseType,
         is_success: bool = False,
         error_msg: str = None,
     ):
+        self._url = url
         self._raw = raw
         self._is_success = is_success
         self._error_msg = error_msg
         self._type = response_type
+
+    @property
+    def url(self) -> NfeUrl:
+        return self._url
 
     @property
     def text(self) -> str:
