@@ -19,10 +19,7 @@ class NfeParserFactory:
 
     def create(self) -> NfeParser:
         if self.nfe_response.type == NfeFetcherResponseType.HTML:
-            if self.SEFAZ_RS_HOSTNAME == self.url.host:
-                return NfeHtmlParser(self.nfe_response)
-
-            if self.SEFAZ_RS_V2_HOSTNAME == self.url.host:
+            if self.url.host in (self.SEFAZ_RS_HOSTNAME, self.SEFAZ_RS_V2_HOSTNAME):
                 return NfeHtmlParser2(self.nfe_response)
 
         raise NfeParserException(
