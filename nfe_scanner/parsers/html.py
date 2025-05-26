@@ -254,7 +254,13 @@ class NfeHtmlParser2(NfeParser):
     def _parse_issuer_address(address_text: str) -> Address:
         address_text = re.sub(r"[\n\t]+", " ", address_text)
         address_text = re.sub(r",\s+,", ",", address_text)
-        street, number, neighborhood, city, state = address_text.split(",")
+        address_values = address_text.split(",")
+        if len(address_values) == 5:
+            street, number, neighborhood, city, state = address_values
+        elif len(address_values) == 6:
+            street, number, _, neighborhood, city, state = address_values
+        else:
+            raise ValueError("Too much values to unpack")
 
         line1 = f"{street.strip()} {number.strip()} {neighborhood.strip()}"
         line2 = None
