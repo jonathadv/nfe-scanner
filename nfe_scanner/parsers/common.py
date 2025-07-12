@@ -1,3 +1,4 @@
+import logging
 import re
 from datetime import datetime
 from decimal import Decimal
@@ -6,6 +7,8 @@ import arrow
 
 from nfe_scanner.models import MetricUnit
 
+LOGGER = logging.getLogger(__name__)
+
 
 def parse_decimal(value: str, decimal_separator: str = ",") -> Decimal:
     sanitized = re.sub(rf"[^\d{decimal_separator}]", "", value).replace(decimal_separator, ".")
@@ -13,11 +16,14 @@ def parse_decimal(value: str, decimal_separator: str = ",") -> Decimal:
 
 
 def parse_metric_unit(unit: str) -> MetricUnit:
-    if unit.upper() in ("KG", "KG0001"):
+    normalized_unit = unit.upper()
+    if normalized_unit in ("KG", "KG0001"):
         return MetricUnit.KG
-    if unit.upper() in ("UN", "UNID", "EX", "AVULSO", "POTE", "CAIXA", "FRASCO"):
-        return MetricUnit.UNIT
-    raise ValueError(f"value '{unit}' is not valid unit.")
+    if normalized_unit not in ("UN", "UNID", "EX", "AVULSO", "POTE", "CAIXA", "FRASCO"):
+        LOGGER.info(
+            "Unit '%s' not recognized. Falling back to '%s'", normalized_unit, MetricUnit.UNIT
+        )
+    return MetricUnit.UNIT
 
 
 def parse_date(value: str) -> datetime:
